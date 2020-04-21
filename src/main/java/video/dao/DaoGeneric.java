@@ -1,6 +1,7 @@
 package video.dao;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface DaoGeneric<T, K> {
 	
@@ -14,6 +15,6 @@ public interface DaoGeneric<T, K> {
 	
 	List<T> findAll();
 	
-	T findByKey(K key);
+	Optional<T> findByKey(K key);
 	
 }
