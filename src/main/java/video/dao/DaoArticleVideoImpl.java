@@ -129,7 +129,8 @@ class DaoArticleVideoImpl implements DaoArticle {
 		List<Article> articles = new ArrayList<Article>();
 		Article a = null;
 		try (Statement st = Context.getInstance().getConnection().createStatement()) {
-			ResultSet rs = st.executeQuery("select a.id_article, a.nb_disques, a.emprunteur, a.id_film, a.type, id, prenom, nom, b.id_film, b.titre, b.date_sortie from adherent right join article a on id=a.emprunteur left join film b on a.id_film=b.id_film");
+			ResultSet rs = st.executeQuery(
+					"select a.id_article, a.nb_disques, a.emprunteur, a.id_film, a.type, id, prenom, nom, b.id_film, b.titre, b.date_sortie from adherent right join article a on id=a.emprunteur left join film b on a.id_film=b.id_film");
 			while (rs.next()) {
 				if (rs.getString("type").equals("d")) {
 					a = new Dvd(rs.getInt("id_article"), rs.getInt("nb_disques"));
@@ -153,9 +154,8 @@ class DaoArticleVideoImpl implements DaoArticle {
 
 	public Optional<Article> findByKey(Integer key) {
 		Article a = null;
-		try (PreparedStatement ps = Context.getInstance().getConnection()
-				.prepareStatement("select a.id_article, a.nb_disques, a.emprunteur, a.id_film, a.type, id, prenom, nom, b.id_film, b.titre, b.date_sortie" + 
-						"from adherent right join article a on id=a.emprunteur left join film b on a.id_film=b.id_film" + "where a.id_article=?")) {
+		try (PreparedStatement ps = Context.getInstance().getConnection().prepareStatement(
+				"select a.id_article, a.nb_disques, a.emprunteur, a.id_film, a.type, id, prenom, nom, b.id_film, b.titre, b.date_sortie from adherent right join article a on id=a.emprunteur left join film b on a.id_film=b.id_film where a.id_article=?")) {
 			ps.setInt(1, key);
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
@@ -181,8 +181,7 @@ class DaoArticleVideoImpl implements DaoArticle {
 	public Optional<Article> findByAdherent(String prenom) {
 		Article a = null;
 		try (PreparedStatement ps = Context.getInstance().getConnection()
-				.prepareStatement("select a.id_article, a.nb_disques, a.emprunteur, a.id_film, a.type, id, prenom, nom, b.id_film, b.titre, b.date_sortie" + 
-						"from adherent right join article a on id=a.emprunteur left join film b on a.id_film=b.id_film" + "where prenom=?")) {
+				.prepareStatement("select a.id_article, a.nb_disques, a.emprunteur, a.id_film, a.type, id, prenom, nom, b.id_film, b.titre, b.date_sortie from adherent right join article a on id=a.emprunteur left join film b on a.id_film=b.id_film where prenom=?")) {
 			ps.setString(1, prenom);
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
