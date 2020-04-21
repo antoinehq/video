@@ -11,7 +11,7 @@ import java.util.Optional;
 import video.context.Context;
 import video.model.Realisateur;
 
-public class DaoRealisateurJdbcImpl implements DaoRealisateur {
+public class DaoRealisateurVideoImpl implements DaoRealisateur {
 
 	@Override
 	public void insert(Realisateur obj) {
@@ -64,6 +64,8 @@ public class DaoRealisateurJdbcImpl implements DaoRealisateur {
 
 	@Override
 	public void deleteById(Integer key) {
+			DaoRealisationVideoImpl daoRealisation=new DaoRealisationVideoImpl();
+			daoRealisation.deleteByRealisateur(key);
 		try (PreparedStatement ps = Context.getInstance().getConnection()
 				.prepareStatement("delete from realisateur where id_realisateur=?")) {
 			ps.setInt(1, key);

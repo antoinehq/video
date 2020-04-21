@@ -5,7 +5,7 @@ public class DaoRealisateurFactory {
 
 	public static DaoRealisateur getInstance() {
 		if (daoRealisateur == null) {
-			daoRealisateur = new DaoRealisateurJdbcImpl();
+			daoRealisateur = new DaoRealisateurVideoImpl();
 		}
 		return daoRealisateur;
 	}
