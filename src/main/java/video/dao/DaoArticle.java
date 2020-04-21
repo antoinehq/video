@@ -1,10 +1,10 @@
 package video.dao;
 
-import java.util.List;
+import java.util.Optional;
 
 import video.model.Article;
 
 public interface DaoArticle extends DaoGeneric<Article, Integer> {
 
-		List<Article> findByAdherent(String prenom);
+		Optional<Article> findByAdherent(String prenom);
 }

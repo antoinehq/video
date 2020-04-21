@@ -1,6 +1,6 @@
 package video.model;
 
-public class Article {
+public abstract class Article {
 	private Integer id;
 	private Integer nbDisques;
 	private Adherent emprunteur;
