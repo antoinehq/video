@@ -3,22 +3,13 @@ package video.model;
 public class Adresse {
 	private Integer numero;
 	private String rue;
-	private String codePostal;
+	private Integer codePostal;
 	private String ville;
-	private Article articles;
 
 	public Adresse() {
 	}
 
-	public Adresse(Integer numero, String rue, String codePostal, String ville, Article articles) {
-		this.numero = numero;
-		this.rue = rue;
-		this.codePostal = codePostal;
-		this.ville = ville;
-		this.articles = articles;
-	}
-
-	public Adresse(Integer numero, String rue, String codePostal, String ville) {
+	public Adresse(Integer numero, String rue, Integer codePostal, String ville) {
 		this.numero = numero;
 		this.rue = rue;
 		this.codePostal = codePostal;
@@ -45,11 +36,11 @@ public class Adresse {
 		this.rue = rue;
 	}
 
-	public String getCodePostal() {
+	public Integer getCodePostal() {
 		return codePostal;
 	}
 
-	public void setCodePostal(String codePostal) {
+	public void setCodePostal(Integer codePostal) {
 		this.codePostal = codePostal;
 	}
 
@@ -61,12 +52,8 @@ public class Adresse {
 		this.ville = ville;
 	}
 
-	public Article getArticles() {
-		return articles;
-	}
-
-	public void setArticles(Article articles) {
-		this.articles = articles;
+	public String donnerAdresse() {
+		return this.numero + " " + this.rue + "\n" + this.codePostal + " " + this.ville;
 	}
 
 }

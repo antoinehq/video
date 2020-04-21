@@ -13,20 +13,13 @@ public class Adherent {
 	public Adherent() {
 	}
 
+	public Adherent(String prenom, String nom) {
+		this.prenom = prenom;
+		this.nom = nom;
+	}
+
 	public Adherent(Integer id, String prenom, String nom) {
 		this.id = id;
-		this.prenom = prenom;
-		this.nom = nom;
-	}
-
-	public Adherent(Integer id, String prenom, String nom, Civilite civilite) {
-		this.id = id;
-		this.prenom = prenom;
-		this.nom = nom;
-		this.civilite = civilite;
-	}
-
-	public Adherent(String prenom, String nom) {
 		this.prenom = prenom;
 		this.nom = nom;
 	}
