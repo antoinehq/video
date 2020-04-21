@@ -5,7 +5,6 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Context {
-	// encapsule et gere la connection
 	private Connection connection = null;
 	private static Context singleton = null;
 
@@ -20,6 +19,7 @@ public class Context {
 	private Context() {
 		try {
 			connection = DriverManager.getConnection("jdbc:postgresql://127.0.0.1:5432/video", "postgres", "postgres");
+			connection.setAutoCommit(false);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
