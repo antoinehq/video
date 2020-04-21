@@ -1,11 +1,14 @@
 package video.model;
 
+import java.util.List;
+
 public class Adherent {
 	private Integer id;
 	private String prenom;
 	private String nom;
 	private Civilite civilite;
 	private Adresse adresse;
+	private List<Article> articles;
 
 	public Adherent() {
 	}
@@ -73,6 +76,22 @@ public class Adherent {
 
 	public void setCivilite(Civilite civilite) {
 		this.civilite = civilite;
+	}
+
+	public Adresse getAdresse() {
+		return adresse;
+	}
+
+	public void setAdresse(Adresse adresse) {
+		this.adresse = adresse;
+	}
+
+	public List<Article> getArticles() {
+		return articles;
+	}
+
+	public void setArticles(List<Article> articles) {
+		this.articles = articles;
 	}
 
 	@Override
