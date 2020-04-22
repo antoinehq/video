@@ -14,7 +14,7 @@ import java.util.Optional;
 import video.context.Context;
 import video.model.Film;
 
-class DaoFilmImpl implements DaoFilm {
+class DaoFilmVideoImpl implements DaoFilm {
 	
 	@Override
 	public void insert(Film obj) {
@@ -22,8 +22,8 @@ class DaoFilmImpl implements DaoFilm {
 				"insert into film(id_film,titre,date_sortie) values(nextval('seq_film'),?,?)",
 				PreparedStatement.RETURN_GENERATED_KEYS)) {
 			ps.setString(1, obj.getTitre());
-			if (obj.getDate_sortie() != null) {
-				ps.setDate(2, new Date(obj.getDate_sortie().getTime()));
+			if (obj.getDateDeSortie() != null) {
+				ps.setDate(2, new Date(obj.getDateDeSortie().getTime()));
 			} else {
 				ps.setNull(2, Types.DATE);
 			}
@@ -32,7 +32,7 @@ class DaoFilmImpl implements DaoFilm {
 			Context.getInstance().getConnection().commit();
 			ResultSet rs = ps.getGeneratedKeys();
 			if (rs.next()) {
-				obj.setId_film(rs.getInt(1));
+				obj.setId(rs.getInt(1));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -50,12 +50,12 @@ class DaoFilmImpl implements DaoFilm {
 		try (PreparedStatement ps = Context.getInstance().getConnection()
 				.prepareStatement("update Film set titre=?, date_sortie=? where id_film=?")) {
 			ps.setString(1, obj.getTitre());
-			if (obj.getDate_sortie() != null) {
-				ps.setDate(2, new Date(obj.getDate_sortie().getTime()));
+			if (obj.getDateDeSortie() != null) {
+				ps.setDate(2, new Date(obj.getDateDeSortie().getTime()));
 			} else {
 				ps.setNull(2, Types.DATE);
 			}
-			ps.setInt(3, obj.getId_film());
+			ps.setInt(3, obj.getId());
 			ps.executeUpdate();
 			Context.getInstance().getConnection().commit();
 		} catch (SQLException e) {
@@ -72,7 +72,7 @@ class DaoFilmImpl implements DaoFilm {
 
 	@Override
 	public void delete(Film obj) {
-		deleteById(obj.getId_film());
+		deleteById(obj.getId());
 	}
 
 	@Override
@@ -101,8 +101,7 @@ class DaoFilmImpl implements DaoFilm {
 			ps.setInt(1, key);
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
-				film = new Film(rs.getInt("id_film"), rs.getString("titre"));
-				film.setDate_sortie(rs.getDate("date_sortie"));
+				film = new Film(rs.getInt("id_film"), rs.getString("titre"), rs.getDate("date_sortie"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
